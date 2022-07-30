@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'alessio-website'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D9F0616C49D14182808E7A5DFDF9CB8A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FA52BCC1E24E4878BD8EEDF28451926B }}
           package: .
