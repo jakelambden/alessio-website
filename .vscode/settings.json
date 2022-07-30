@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/ea90d72f-0692-4b6b-9f1d-31d21d50668a/microsoft.web/sites/subscriptions/ea90d72f-0692-4b6b-9f1d-31d21d50668a/resourceGroups/rg-alessio-website/providers/Microsoft.Web/sites/alessio-website",
+    "appService.deploySubpath": "."
+}
