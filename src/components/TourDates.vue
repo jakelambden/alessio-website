@@ -1,11 +1,25 @@
 <template>
     <div id="tour-dates">
-        <v-carousel show-arrows="hover" progress="primary" v-model="model" height="100%">
-            <v-carousel-item v-for="(color, i) in colors" :key="color">
+        <v-carousel show-arrows="hover" progress="primary" v-model="model" height="100%" delimiter-icon="mdi-minus" hide-delimiters>
+            <template v-slot:prev="{ props }">
+              <v-btn
+                variant="elevated"
+                color="success"
+                @click="props.onClick"
+              >{{tours[model].name}}</v-btn>
+            </template>
+            <template v-slot:next="{ props }">
+              <v-btn
+                variant="elevated"
+                color="info"
+                @click="props.onClick"
+              >{{tours[model].name}}</v-btn>
+            </template>
+            <v-carousel-item v-for="tour in tours" :key="tour.id">
                 <v-container class="d-flex flex-column align-center justify-center pa-16 fill-height bg-surface">
                     <v-spacer></v-spacer>
-                    <h1 class="font-weight-black">Tour Name {{ i + 1 }}</h1>
-                    <h2 class="font-weight-black font-italic">Tour Description {{ i + 1 }}</h2>
+                    <h1 class="font-weight-black">{{ tour.name }}</h1>
+                    <h2 class="font-weight-black font-italic">{{ tour.description }}</h2>
                     <v-spacer></v-spacer>
                     <h3 class="font-weight-black">Session Availability</h3>
                     <v-divider length="300"></v-divider>
@@ -23,20 +37,12 @@
     </div>
 </template>
 
-<script lang = 'ts'>
-// Change this bizz
-  export default {
-    data: () => ({
-      model: 0,
-      colors: [
-        'primary',
-        'secondary',
-        'primary',
-        'secondary',
-        'primary',
-      ],
-    }),
-  }
+<script setup lang = 'ts'>
+import { ref } from 'vue';
+import { type Tour, useTourStore } from '../stores/TourStore';
+const model = ref(0);
+const tourStore = useTourStore();
+const tours = ref(tourStore.$state.tours);
 </script>
 
 <style>
