@@ -1,26 +1,19 @@
 <template>
     <v-app-bar app elevate-on-scroll scroll-target="#scrolling-techniques-7">
         <v-row no-gutters>
-            <v-col class="d-flex justify-start">
+            <v-col cols="3">
                 <v-app-bar-nav-icon/>
             </v-col>
-            <v-col class="d-flex flex-column align-center justify-center">
-                <h1 class="font-weight-black">Alessio Vanzan</h1>
-                <!-- <v-divider length="100"></v-divider> -->
+            <v-col cols="6" class="d-flex align-center justify-center">
+                <h3 class="font-weight-black">Alessio Vanzan</h3>
             </v-col>
-            <v-col>
+            <v-col cols="3">
                 <v-row no-gutters justify="end">
                     <v-btn icon @click="toggleTheme">
                         <v-icon>{{ theme.global.name.value === 'darkTheme' ? 'mdi-white-balance-sunny' : 'mdi-weather-night ' }}</v-icon>
                     </v-btn>
-                    <v-btn icon>
-                        <v-icon>mdi-cart</v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                        <v-icon>mdi-grid</v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                        <v-icon>mdi-heart</v-icon>
+                     <v-btn icon>
+                        <v-icon>mdi-instagram</v-icon>
                     </v-btn>
                 </v-row>
             </v-col>

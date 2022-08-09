@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid class="d-flex flex-column bg-surface">
+    <v-container fluid class="d-flex flex-column bg-background">
         <!-- <v-divider length="1000" color="white" /> -->
         <Logo/>
         <AboutMe/>

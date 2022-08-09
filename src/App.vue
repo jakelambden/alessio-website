@@ -3,7 +3,7 @@
     <NavMain />
     <!-- <v-navigation-drawer app>
     </v-navigation-drawer> -->
-    <v-main>
+    <v-main color="background">
       <RouterView />
     </v-main>
     <FooterMain />
