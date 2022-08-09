@@ -24,8 +24,8 @@
                     <h3 class="font-weight-black">Session Availability</h3>
                     <v-divider length="300"></v-divider>
                     <v-chip-group multiple>
-                        <v-chip v-for="(date, index) in tour.tourDays" :key="index" filter class="ma-2" color="white">
-                          {{ date.toLocaleString('en-us', {weekday:'long', month: '2-digit', year: '2-digit', timeZone: 'UTC'}) }}
+                        <v-chip v-for="(booking, index) in tour.bookings" :key="index" :disabled="booking.available" filter class="ma-2" color="white">
+                          {{ booking.date.toLocaleString('en-us', {weekday:'long', month: '2-digit', year: '2-digit', timeZone: 'UTC'}) }}
                         </v-chip>
                     </v-chip-group>
                     <v-btn>Enquire now</v-btn>

@@ -5,39 +5,20 @@
         <v-col cols="12" class="d-flex justify-center">
           <h2 class="font-weight-black">Latest Uploads</h2>
         </v-col>
-        <v-col
-          v-for="n in imageCount"
-          :key="n"
-          class="d-flex child-flex"
-          :cols="12 / imageCount"
-        >
-          <v-img
-            :src="image(n)"
-            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-            aspect-ratio="1"
-            cover
-            class="bg-grey-lighten-2"
-          >
-          <div class="image-name">
-            Image name {{ n }}
-          </div>
+        <v-col v-for="n in imageCount" :key="n" class="d-flex child-flex" :cols="12 / imageCount">
+          <v-img :src="latestUploadImages[n].url" :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`" aspect-ratio="1" cover class="bg-grey-lighten-2">
+            <div class="image-name">{{ latestUploadImages[n].name }}</div>
             <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <v-progress-circular
-                  indeterminate
-                  color="grey-lighten-5"
-                ></v-progress-circular>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="grey-lighten-5">
+                </v-progress-circular>
               </v-row>
             </template>
           </v-img>
         </v-col>
           <v-col cols="12" class="d-flex justify-end">
             <router-link to="/gallery">
-                <v-btn>See full gallery <v-icon class="padded-arrow">mdi-arrow-right</v-icon></v-btn>
+                <v-btn>See full gallery<v-icon class="padded-arrow">mdi-arrow-right</v-icon></v-btn>
             </router-link>
         </v-col>
       </v-row>
@@ -46,24 +27,13 @@
 </template>
 
 <script setup lang='ts'>
-  import tattooImageOne from '../assets/1.jpg';
-  import tattooImageTwo from '../assets/2.jpg';
-  import tattooImageThree from '../assets/3.jpg';
-  const imageCount = 3;
+import { useGalleryStore } from '../stores/GalleryStore';
+import { ref } from 'vue';
 
-function image(num: number){
-  switch (num % 3){
-    case 0:
-      return tattooImageOne;
-    case 1:
-      return tattooImageTwo;
-    case 2:
-      return tattooImageThree;
-    default:
-      return;
-  }
-}
+const galleryStore = useGalleryStore();
+const imageCount = 3;
 
+const latestUploadImages = ref(galleryStore.gallery);
 </script>
 
 <style>

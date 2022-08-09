@@ -6,14 +6,14 @@
     <v-main>
       <RouterView />
     </v-main>
-    <!-- <v-footer app>
-    </v-footer> -->
+    <FooterMain />
   </v-app>
 </template>
 
 <script setup lang = 'ts'>
 import { RouterView } from 'vue-router';
 import NavMain from '@/components/NavMain.vue';
+import FooterMain from '@/components/FooterMain.vue'
 </script>
 
 <style>
