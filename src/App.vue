@@ -3,7 +3,7 @@
     <NavMain />
     <!-- <v-navigation-drawer app>
     </v-navigation-drawer> -->
-    <v-main color="background">
+    <v-main>
       <RouterView />
     </v-main>
     <FooterMain />
@@ -24,7 +24,7 @@ import FooterMain from '@/components/FooterMain.vue'
 }
 
 .v-main{
-  width: 1080px;
   align-self: center;
+  font-family: 'Josefin Sans', san-serif;
 }
 </style>

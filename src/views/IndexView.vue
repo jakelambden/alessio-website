@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid class="d-flex flex-column bg-background">
+    <!-- <v-container fluid class="d-flex flex-column bg-background"> -->
         <!-- <v-divider length="1000" color="white" /> -->
         <Logo/>
         <AboutMe/>
@@ -9,7 +9,7 @@
         <TourDates/>
         <!-- <v-divider length="1000" color="white" /> -->
         <!-- <MailingList/> -->
-    </v-container>
+    <!-- </v-container> -->
 </template>
      
 <script setup lang = 'ts'>

@@ -1,11 +1,9 @@
 <template>
-    <div id="logo">
-        <v-fade-transition mode="out-in">
-            <v-parallax :src="logoCover">
-                <v-img :src="logo" contain width="800px" height="800px" class="mx-auto"/>
-            </v-parallax>
-        </v-fade-transition>
-    </div>
+    <v-fade-transition mode="out-in">
+        <v-parallax :src="logoCover">
+            <v-img :src="logo" contain height="80vh" class="mx-auto"/>
+        </v-parallax>
+    </v-fade-transition>
 </template>
 
 <script setup lang ='ts'>
@@ -40,7 +38,4 @@ onMounted(() => {
 </script>
 
 <style>
-#logo {
-    height: 800px;
-}
 </style>
