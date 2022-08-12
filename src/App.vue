@@ -6,14 +6,14 @@
     <v-main>
       <RouterView />
     </v-main>
-    <FooterMain />
+    <MailingList />
   </v-app>
 </template>
 
 <script setup lang = 'ts'>
 import { RouterView } from 'vue-router';
 import NavMain from '@/components/NavMain.vue';
-import FooterMain from '@/components/FooterMain.vue'
+import MailingList from '@/components/MailingList.vue'
 </script>
 
 <style>
