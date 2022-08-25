@@ -37,4 +37,8 @@ const toggleTheme = () => theme.global.name.value = theme.global.current.value.d
 .title-text {
   font-family: 'Aboreto', san-serif;
 }
+
+.v-app-bar {
+    height: 7vh;
+}
 </style>

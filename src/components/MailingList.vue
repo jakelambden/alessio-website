@@ -1,5 +1,5 @@
 <template>
-    <v-footer app bottom fixed elevate padless>
+    <v-footer app bottom fixed elevate padless class="footer-mailing">
         <v-row no-gutters>
             <v-col cols="12" class="d-flex justify-center align-center">
                 <h4>To stay updated, Join the mailing list below</h4>
@@ -26,3 +26,9 @@ const valid = false;
 const email = '';
 const emailRules = [v => !!v || 'E-mail is required', v => /.+@.+/.test(v) || 'E-mail must be valid'];
 </script>
+
+<style>
+.footer-mailing{
+    height: 8vh;
+}
+</style>

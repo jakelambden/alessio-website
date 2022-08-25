@@ -1,7 +1,7 @@
 <template>
     <v-fade-transition mode="out-in">
         <v-parallax :src="logoCover">
-            <v-img :src="logo" contain height="80vh" class="mx-auto"/>
+            <v-img :src="logo" contain height="85vh" class="mx-auto"/>
         </v-parallax>
     </v-fade-transition>
 </template>

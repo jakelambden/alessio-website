@@ -1,5 +1,6 @@
 <template>
-    <v-app class="repeating-gradient">
+    <v-app>
+      <div class="repeating-gradient"/>
       <NavMain />
       <!-- <v-navigation-drawer app>
       </v-navigation-drawer> -->
@@ -25,15 +26,19 @@ import MailingList from '@/components/MailingList.vue'
 
 .v-main{
   align-self: center;
+  width: 1024px;
   font-family: 'Josefin Sans', san-serif;
 }
 
 .repeating-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background-image: repeating-linear-gradient(-45deg,
-                      rgba(255,255,255,0.25),
-                      rgba(255,255,255,0) 5px,
-                      rgba(255,255,255,0.25) 5px,
-                      rgba(255,255,255,0) 10px
+                      rgba(255,255,255,0.01),
+                      rgba(255,255,255,0.01) 10px,
+                      rgba(255,255,255,0) 10px,
+                      rgba(255,255,255,0) 20px
                     );
 }
 </style>
