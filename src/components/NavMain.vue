@@ -13,16 +13,18 @@
                         <v-icon>{{ theme.global.name.value === 'darkTheme' ? 'mdi-white-balance-sunny' : 'mdi-weather-night ' }}</v-icon>
                     </v-btn>
                      <v-btn icon href="https://www.instagram.com/alessio_vanzan">
-                        <v-icon>mdi-instagram</v-icon>
+                         <v-icon>mdi-instagram</v-icon>
                     </v-btn>
                 </v-row>
             </v-col>
         </v-row>
     </v-app-bar>
+    <v-img id="nav-logo" :src="logo"/>
 </template>
 
 <script setup lang='ts'>
 import { useTheme } from 'vuetify';
+import logo from '@/assets/logo.png';
 
 const theme = useTheme();
 const toggleTheme = () => theme.global.name.value = theme.global.current.value.dark ? 'lightTheme' : 'darkTheme';
@@ -39,6 +41,15 @@ const toggleTheme = () => theme.global.name.value = theme.global.current.value.d
 }
 
 .v-app-bar {
-    height: 7vh;
+    height: 64px;
+}
+
+#nav-logo {
+    position: fixed;
+    align-self: center;
+    top: 7px;
+    height: 90px;
+    width: 200px;
+    z-index: 1010;
 }
 </style>
