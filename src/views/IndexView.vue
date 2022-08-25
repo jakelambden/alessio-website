@@ -5,8 +5,7 @@
     <WorkStyle/>
     <Process/>
     <LatestUploads/>
-    <TouringEvents/>
-    <LocalEvents/>
+    <UpcomingEvents/>
     <Footer/>
 </template>
      
@@ -14,8 +13,7 @@
 import Logo from '@/components/Logo.vue';
 import AboutMe from '@/components/AboutMe.vue';
 import LatestUploads from '@/components/LatestUploads.vue';
-import TouringEvents from '@/components/TouringEvents.vue';
-import LocalEvents from '@/components/LocalEvents.vue';
+import UpcomingEvents from '@/components/UpcomingEvents.vue';
 import Bio from '../components/Bio.vue';
 import WorkStyle from '../components/WorkStyle.vue';
 import Process from '../components/Process.vue';

@@ -1,59 +1,50 @@
 import { defineStore } from 'pinia';
 
 export interface GalleryState {
-    gallery: GalleryImage[];
+    gallery: Map<string, GalleryImageData>;
 }
 
-export interface GalleryImage {
-    id: string;
+export interface GalleryImageData {
     name: string;
     description: string;
     url: string;
     uploaded: Date;
 }
 
+export type GalleryImageUpsert = { id: string } & Partial<GalleryImageData>;
+
 export const useGalleryStore = defineStore('gallery', {
   state: (): GalleryState => ({
-    gallery: [
-        {
-            id: '675676',
-            name: 'image 1',
-            description: 'image description 1',
-            url: '/src/assets/1.jpg',
-            uploaded: new Date(),
-        },
-        {
-            id: '567657',
-            name: 'image 2',
-            description: 'image description 2',
-            url: '/src/assets/2.jpg',
-            uploaded: new Date(),
-        },
-        {
-            id: '7686876',
-            name: 'image 3',
-            description: 'image description 3',
-            url: '/src/assets/3.jpg',
-            uploaded: new Date(),
-        },
-        {
-            id: '456456',
-            name: 'image 4',
-            description: 'image description 4',
-            url: '/src/assets/4.jpg',
-            uploaded: new Date(),
-        },
-        {
-            id: '879879',
-            name: 'image 5',
-            description: 'image description 5',
-            url: '/src/assets/5.jpg',
-            uploaded: new Date(),
-        }
-    ]
+    gallery: new Map<string, GalleryImageData>()
   }),
   getters: {
+    getLatestUploads: (state) => {
+      return (imageCount: number) => Array.from(state.gallery)
+        .map(([key, value]) => ({id: key, ...value}))
+        .sort((a, b) => a.uploaded.getTime() - b.uploaded.getTime())
+        .slice(0, imageCount);
+    }
   },
   actions: {
-  }
+    upsertGalleryImages(galleryImageUpserts: GalleryImageUpsert[]){
+        galleryImageUpserts.forEach(galleryImageUpsert => {
+          const { id, ...galleryImageData } = galleryImageUpsert;
+  
+          if (this.gallery.has(id)){
+            this.gallery.set(id, {...this.gallery.get(id) as GalleryImageData, ...galleryImageData});
+          }
+          else{
+            const newGalleryImage: GalleryImageData = {
+                name: "",
+                description: "",
+                url: "",
+                uploaded: new Date(),
+              ...galleryImageData
+            }
+  
+            this.gallery.set(id, newGalleryImage);
+          }
+        });
+      },
+    }
 });

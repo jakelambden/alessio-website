@@ -4,13 +4,16 @@ import { fileURLToPath, URL } from 'url'
 import vuetify from 'vite-plugin-vuetify'
 
 export default defineConfig({
-  plugins: [
+	server: {
+		port: 3124,
+	},
+	plugins: [
 		vue(),
 		vuetify({ autoImport: true }),
 	],
 	resolve: {
 		alias: {
-		  '@': fileURLToPath(new URL('./src', import.meta.url))
+			'@': fileURLToPath(new URL('./src', import.meta.url))
 		}
-	  }
+	}
 })
