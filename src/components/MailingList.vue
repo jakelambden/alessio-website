@@ -1,6 +1,6 @@
 <template>
-    <v-footer app bottom fixed class="footer-mailing pa-0 ma-0" color="background">
-        <v-container class="footer-mailing pl-2 pr-2">
+    <v-footer app bottom fixed class="pa-0 ma-0" color="surface">
+        <v-container class="pl-2 pr-2 pb-5">
             <v-row>
                 <v-col class="d-flex flex-column align-center pa-0">
                     <h4 class="mb-1">To stay updated, Join the mailing list below</h4>
@@ -18,7 +18,6 @@
                         </v-col>
                     </v-row>
                 </v-col>
-
             </v-row>
         </v-container>
     </v-footer>
