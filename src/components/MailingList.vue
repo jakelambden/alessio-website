@@ -1,23 +1,26 @@
 <template>
-    <v-footer app bottom fixed elevate padless class="footer-mailing">
-        <v-row no-gutters>
-            <v-col cols="12" class="d-flex justify-center align-center">
-                <h4>To stay updated, Join the mailing list below</h4>
-            </v-col>
-            <v-col cols="8" class="d-flex justify-center align-center">
-                <v-text-field
-                    density="compact"
-                    v-model="email"
-                    :rules="emailRules"
-                    hide-details="auto"
-                    label="E-mail"
-                    required
-                ></v-text-field>
-            </v-col>
-            <v-col cols="4" class="d-flex justify-center align-center">
-                <v-btn>Submit</v-btn>
-            </v-col>
-        </v-row>
+    <v-footer app bottom fixed class="footer-mailing pa-0 ma-0" color="background">
+        <v-container class="footer-mailing pl-2 pr-2">
+            <v-row>
+                <v-col class="d-flex flex-column align-center pa-0">
+                    <h4 class="mb-1">To stay updated, Join the mailing list below</h4>
+                    <v-row id="input-section">
+                        <v-col class="d-flex">
+                            <v-text-field
+                                density="compact"
+                                v-model="email"
+                                :rules="emailRules"
+                                hide-details="auto"
+                                label="E-mail"
+                                required
+                            ></v-text-field>
+                            <v-btn>Submit</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-col>
+
+            </v-row>
+        </v-container>
     </v-footer>
 </template>
 
@@ -28,7 +31,7 @@ const emailRules = [v => !!v || 'E-mail is required', v => /.+@.+/.test(v) || 'E
 </script>
 
 <style>
-.footer-mailing{
-    height: 8vh;
+#input-section{
+    width: 100%;
 }
 </style>
