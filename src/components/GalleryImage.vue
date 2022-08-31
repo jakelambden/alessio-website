@@ -1,8 +1,7 @@
 <template>
+  <v-container class="pa-0 ma-0">
     <v-img
         :src="props.galleryImage.url"
-        min-height="50"
-        aspect-ratio="1"
         cover
         class="bg-grey-lighten-2"
     >
@@ -14,6 +13,7 @@
             </v-row>
         </template>
     </v-img>
+  </v-container>
 </template>
 
 <script setup lang="ts">

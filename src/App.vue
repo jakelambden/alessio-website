@@ -7,7 +7,7 @@
       <v-main>
         <RouterView />
       </v-main>
-      <MailingList />
+      <!-- <MailingList /> -->
     </v-app>
 </template>
 

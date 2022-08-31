@@ -40,5 +40,12 @@ export const mockGalleryData: GalleryImageUpsert[] = [
         description: 'image description 5',
         url: `https://picsum.photos/100/100?image=${randomNumber()}`,
         uploaded: new Date(Date.UTC(2023, 11, 1)),
+    },
+    {
+        id: uuid(),
+        name: 'icecream is good',
+        description: 'image description 6',
+        url: `https://picsum.photos/100/100?image=${randomNumber()}`,
+        uploaded: new Date(Date.UTC(2023, 11, 5)),
     }
 ]

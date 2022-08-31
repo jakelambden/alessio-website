@@ -40,10 +40,6 @@ const toggleTheme = () => theme.global.name.value = theme.global.current.value.d
   font-family: 'Aboreto', san-serif;
 }
 
-.v-app-bar {
-    height: 64px;
-}
-
 #nav-logo {
     position: fixed;
     align-self: center;

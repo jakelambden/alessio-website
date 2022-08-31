@@ -1,9 +1,9 @@
 <template>
-    <v-container class="pa-16 bg-surface">
-        <v-row>
-            <v-col>
+    <v-container class="pa-8 bg-surface fill-height">
+        <v-row class="fill-height">
+            <v-col class="d-flex flex-column justify-center" > 
                 <h3 class="text-center">
-                    About Me section
+                    About Me
                 </h3>
                 <h4 class="font-weight-light font-italic text-center">
                     Lorem ipsum dolor sit amet,

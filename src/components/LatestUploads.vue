@@ -1,20 +1,19 @@
 <template>
-    <v-container class="align-center bg-surface">
-      <v-row class="pa-2">
-        <v-col class="d-flex justify-center">
-          <h2 class="font-weight-black">Latest Uploads</h2>
-        </v-col>
-      </v-row>
-      <v-row dense>
-        <v-col v-for="galleryImage in galleryImages" :key="galleryImage.id" cols="6">
-          <GalleryImage :galleryImage="galleryImage" />
-        </v-col>
-      </v-row>
-      <v-row class="pa-2">
-        <v-col class="d-flex justify-center">
-          <router-link to="/gallery">
-            <v-btn>See full gallery<v-icon class="padded-arrow">mdi-arrow-right</v-icon></v-btn>
-          </router-link>
+    <v-container class="bg-surface fill-height">
+      <v-row class="fill-height" align="center">
+        <v-col align="center">
+          <h2 class="font-weight-black padded-element">Latest Uploads</h2>
+          <v-divider class="padded-element"/>
+          <v-row style="width: 100%" dense class="padded-element">
+            <v-col v-for="galleryImage in galleryImages" :key="galleryImage.id" cols="6">
+              <GalleryImage :galleryImage="galleryImage" />
+            </v-col>
+          </v-row>
+          <div class="padded-element">
+            <router-link to="/gallery">
+              <v-btn>See full gallery<v-icon class="padded-arrow">mdi-arrow-right</v-icon></v-btn>
+            </router-link>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -27,7 +26,7 @@ import { mockGalleryData } from '@/data/MockDataGalleryImages';
 import { ref } from 'vue';
 
 const galleryStore = useGalleryStore();
-const imageCount = 4;
+const imageCount = 6;
 
 galleryStore.upsertGalleryImages(mockGalleryData);
 const galleryImages = ref(galleryStore.getLatestUploads(imageCount));
@@ -45,5 +44,10 @@ a {
 
 .padded-arrow {
   padding-left: 10px;
+}
+
+.padded-element {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 </style>

@@ -1,38 +1,38 @@
 <template>
-  <v-container class="bg-surface">
-    <v-row>
-      <v-col>
+  <v-container class="bg-surface fill-height">
+    <v-row class="fill-height">
+      <v-col class="d-flex flex-column justify-center" > 
         <h3 class="text-center">Events</h3>
         <v-divider/>
+        <v-carousel class="fill-height" progress="primary" v-model="currentTourIndex" hide-delimiters>
+          <template v-slot:prev="{ props }">
+            <div class="navigation-container">
+              <v-btn class="navigation-button"
+                rounded
+                variant="elevated"
+                color="background"
+                @click="props.onClick"
+              >{{events[prevTourIndex].name}}
+              </v-btn>
+            </div>
+          </template>
+          <template v-slot:next="{ props }">
+            <div class="navigation-container">
+              <v-btn class="navigation-button"
+                rounded
+                variant="elevated"
+                color="background"
+                @click="props.onClick"
+              >{{events[nextTourIndex].name}}
+              </v-btn>
+            </div>
+          </template>
+          <v-carousel-item v-for="event in events" :key="event.id">
+            <UpcomingEvent :event="event"/>
+          </v-carousel-item>
+        </v-carousel>
       </v-col>
     </v-row>
-    <v-carousel progress="primary" v-model="currentTourIndex" hide-delimiters>
-        <template v-slot:prev="{ props }">
-          <div class="navigation-container">
-            <v-btn class="navigation-button"
-              rounded
-              variant="elevated"
-              color="background"
-              @click="props.onClick"
-            >{{events[prevTourIndex].name}}
-            </v-btn>
-          </div>
-        </template>
-        <template v-slot:next="{ props }">
-          <div class="navigation-container">
-            <v-btn class="navigation-button"
-              rounded
-              variant="elevated"
-              color="background"
-              @click="props.onClick"
-            >{{events[nextTourIndex].name}}
-            </v-btn>
-          </div>
-        </template>
-        <v-carousel-item v-for="event in events" :key="event.id">
-          <UpcomingEvent :event="event"/>
-        </v-carousel-item>
-    </v-carousel>
   </v-container>
 </template>
 

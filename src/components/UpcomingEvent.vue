@@ -1,42 +1,37 @@
 <template>
-    <div id="event-image">
-        <v-img
-            :src="props.event.image"
-            cover
-        >
-            <div class="fill-height radial-gradient" />
-        </v-img>
-    </div>
+    <v-img
+        id="event-image"
+        :src="props.event.image"
+        cover
+    >
+        <!-- <div class="fill-height radial-gradient" /> -->
+    </v-img>
     <div id="event-content">
-        <v-container class="d-flex flex-column fill-height">
-                <v-row>
-                    <v-col align="center">
-                        <h4 class="font-italic font-weight-light">{{ location }}</h4>
-                        <h5 class="font-weight-light">
-                            {{ event.startDate.toLocaleString('en-GB', {day: '2-digit', month: '2-digit', year: '2-digit', timeZone: 'UTC'}) }}
-                            -
-                            {{ event.endDate.toLocaleString('en-GB', {day: '2-digit', month: '2-digit', year: '2-digit', timeZone: 'UTC'}) }}
-                        </h5>
-                    </v-col>
-                </v-row>
-                <v-row align="center">
-                    <v-col align="center">
-                        <h2>{{ props.event.name }}</h2>
-                        <h3 class="font-italic">{{ props.event.description }}</h3>
-                    </v-col>
-                </v-row>
-                <v-row align="center">
-                    <v-col align="center">
-                        <h3>Session Availability</h3>
-                        <v-chip-group multiple column class="justify-center pa-2">
-                            <v-chip v-for="(booking, index) in props.event.bookings" :key="index" :disabled="booking.available" filter size="large">
-                                {{ booking.date.toLocaleString('en-GB', {weekday:'short', day: '2-digit', month: '2-digit', timeZone: 'UTC'}) }}
-                            </v-chip>
-                        </v-chip-group>
-                        <v-btn>Enquire now</v-btn>
-                    </v-col>
-                </v-row>
+        <v-container class="fill-height">
+            <v-row class="fill-height d-flex flex-column">
+                <v-col class="d-flex flex-column" align="center">
+                    <h4 class="font-italic font-weight-light">{{ location }}</h4>
+                    <h5 class="font-weight-light">
+                        {{ event.startDate.toLocaleString('en-GB', {day: '2-digit', month: '2-digit', year: '2-digit', timeZone: 'UTC'}) }}
+                        -
+                        {{ event.endDate.toLocaleString('en-GB', {day: '2-digit', month: '2-digit', year: '2-digit', timeZone: 'UTC'}) }}
+                    </h5>
+                </v-col>
+                <v-col class="d-flex flex-column" align="center">
+                    <h2>{{ props.event.name }}</h2>
+                    <h3 class="font-italic">{{ props.event.description }}</h3>
+                </v-col>
+                <v-col class="d-flex flex-column" align="center">
+                    <h3>Session Availability</h3>
+                    <v-chip-group multiple column class="justify-center pa-2">
+                        <v-chip v-for="(booking, index) in props.event.bookings" :key="index" :disabled="booking.available" filter size="large">
+                            {{ booking.date.toLocaleString('en-GB', {weekday:'short', day: '2-digit', month: '2-digit', timeZone: 'UTC'}) }}
+                        </v-chip>
+                    </v-chip-group>
+                    <v-btn>Enquire now</v-btn>
+                </v-col>
                 <v-spacer></v-spacer>
+            </v-row>
         </v-container>
     </div>
 </template>
