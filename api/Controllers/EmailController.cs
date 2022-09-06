@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SendGrid;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,14 @@ namespace api.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
+        private readonly ISendGridClient _sendGridClient;
+        private readonly IConfiguration _configuration;
+        public EmailController(ISendGridClient sendGridClient, IConfiguration configuration)
+        {
+            _sendGridClient = sendGridClient;
+            _configuration = configuration;
+        }
+
         // GET: api/<EmailController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +33,21 @@ namespace api.Controllers
 
         // POST api/<EmailController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task PostAsync([FromBody] string value)
         {
+            var data = string.Format(@"{{ ""contacts"": [{{ ""email"": {0} }}] }}", value);
+
+            Console.WriteLine(data);
+
+            //var response = await _sendGridClient.RequestAsync(
+            //    method: SendGridClient.Method.PUT,
+            //    urlPath: "marketing/contacts",
+            //    requestBody: data
+            //);
+
+            //Console.WriteLine(response.StatusCode);
+            //Console.WriteLine(response.Body.ReadAsStringAsync().Result);
+            //Console.WriteLine(response.Headers.ToString());
         }
 
         // PUT api/<EmailController>/5
