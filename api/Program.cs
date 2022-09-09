@@ -1,32 +1,53 @@
 using SendGrid.Extensions.DependencyInjection;
+using api.Common;
+using api.Repository;
+using api.Services;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+StaticLogger.EnsureInitialized();
+Log.Information("Azure Storage API Booting Up...");
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddSendGrid(options =>
+try
 {
-    options.ApiKey = builder.Configuration
-    .GetSection("SendGridEmailSettings").GetValue<string>("APIKey");
-});
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Host.UseSerilog((_, config) =>
+    {
+        config.WriteTo.Console()
+        .ReadFrom.Configuration(builder.Configuration);
+    });
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+    builder.Services.AddSendGrid(options =>
+    {
+        options.ApiKey = builder.Configuration.GetValue<string>("SendGridAPIKey");
+    });
 
-var app = builder.Build();
+    builder.Services.AddTransient<IAzureStorage, AzureStorage>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var app = builder.Build();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
+    app.Run();
+
+    Log.Information("API is now ready...");
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+catch (Exception ex) when (!ex.GetType().Name.Equals("StopTheHostException", StringComparison.Ordinal))
+{
+    StaticLogger.EnsureInitialized();
+    Log.Fatal(ex, "Unhandled Exception");
+}
+finally
+{
+    StaticLogger.EnsureInitialized();
+    Log.Information("Azure Storage API Shutting Down...");
+    Log.CloseAndFlush();
+}
