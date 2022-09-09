@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-0 ma-0">
     <v-img
-        :src="props.galleryImage.url"
+        :src="props.galleryImage.uri"
         cover
         class="bg-grey-lighten-2"
     >

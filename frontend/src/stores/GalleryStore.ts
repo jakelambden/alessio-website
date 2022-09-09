@@ -6,9 +6,8 @@ export interface GalleryState {
 
 export interface GalleryImageData {
     name: string;
-    description: string;
-    url: string;
-    uploaded: Date;
+    uri: string;
+    uploadedAt: Date;
 }
 
 export type GalleryImageUpsert = { id: string } & Partial<GalleryImageData>;
@@ -21,7 +20,7 @@ export const useGalleryStore = defineStore('gallery', {
     getLatestUploads: (state) => {
       return (imageCount: number) => Array.from(state.gallery)
         .map(([key, value]) => ({id: key, ...value}))
-        .sort((a, b) => a.uploaded.getTime() - b.uploaded.getTime())
+        .sort((a, b) => a.uploadedAt.getTime() - b.uploadedAt.getTime())
         .slice(0, imageCount);
     }
   },
@@ -36,9 +35,8 @@ export const useGalleryStore = defineStore('gallery', {
           else{
             const newGalleryImage: GalleryImageData = {
                 name: "",
-                description: "",
-                url: "",
-                uploaded: new Date(),
+                uri: "",
+                uploadedAt: new Date(),
               ...galleryImageData
             }
   

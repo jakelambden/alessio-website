@@ -20,29 +20,17 @@
 </template>
 
 <script setup lang='ts'>
-import { useGalleryStore } from '../stores/GalleryStore';
+import { useGalleryStore, type GalleryState } from '../stores/GalleryStore';
 import GalleryImage from '@/components/GalleryImage.vue';
-import { mockGalleryData } from '@/data/MockDataGalleryImages';
 import { ref } from 'vue';
 
 const galleryStore = useGalleryStore();
+const galleryImages = ref();
 const imageCount = 6;
 
-const myHeaders = new Headers();
-const myRequest = new Request('https://storageaccountalessio.blob.core.windows.net/data/MockDataGalleryImages.json', {
-  method: 'GET',
-  headers: myHeaders,
-  mode: 'no-cors',
-  cache: 'default',
+galleryStore.$subscribe((_mutation: any, _state: GalleryState) => {
+  galleryImages.value = galleryStore.getLatestUploads(imageCount);
 });
-
-//Util Class
-fetch(myRequest)
-  .then((response) => {console.info(response); response.json()})
-  .then((data) => console.log(data));
-
-galleryStore.upsertGalleryImages(mockGalleryData);
-const galleryImages = ref(galleryStore.getLatestUploads(imageCount));
 </script>
 
 <style>

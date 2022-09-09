@@ -15,6 +15,46 @@
 import { RouterView } from 'vue-router';
 import NavMain from '@/components/NavMain.vue';
 import MailingList from '@/components/MailingList.vue'
+import { useGalleryStore, type GalleryImageUpsert } from './stores/GalleryStore';
+import { v4 as uuid } from 'uuid';
+
+const galleryStore = useGalleryStore();
+
+//Util Class?
+const myHeaders = new Headers();
+const myRequest = new Request('https://localhost:7102/api/storage/get', {
+  method: 'GET',
+  headers: myHeaders,
+  cache: 'default',
+});
+
+interface IncomingImageData {
+  name: string,
+  uri: string,
+  uploadedAt: Date,
+}
+
+//Util Class?
+fetch(myRequest)
+  .then((response) => response.json())
+  .then((data: IncomingImageData[]) => {
+    const galleryImages: GalleryImageUpsert[] = [];
+
+    data.forEach(element => {
+      const galleryData: GalleryImageUpsert = {
+        id: uuid(),
+        name: element.name,
+        uri: element.uri,
+        uploadedAt: new Date(element.uploadedAt),
+      }
+
+      galleryImages.push(galleryData);
+    });
+
+    galleryStore.upsertGalleryImages(galleryImages);
+    return;
+  });
+
 </script>
 
 <style>

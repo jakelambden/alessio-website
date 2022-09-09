@@ -10,6 +10,7 @@ Log.Information("Azure Storage API Booting Up...");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
+
     builder.Host.UseSerilog((_, config) =>
     {
         config.WriteTo.Console()
@@ -23,6 +24,15 @@ try
         options.ApiKey = builder.Configuration.GetValue<string>("SendGridAPIKey");
     });
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowSpecificOrigin", builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+        );
+    });
+
     builder.Services.AddTransient<IAzureStorage, AzureStorage>();
 
     var app = builder.Build();
@@ -31,6 +41,7 @@ try
     {
         app.UseSwagger();
         app.UseSwaggerUI();
+        app.UseCors("AllowSpecificOrigin");
     }
 
     app.UseHttpsRedirection();
