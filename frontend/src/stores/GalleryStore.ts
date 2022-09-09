@@ -6,6 +6,7 @@ export interface GalleryState {
 
 export interface GalleryImageData {
     name: string;
+    collection: string;
     uri: string;
     uploadedAt: Date;
 }
@@ -26,6 +27,7 @@ export const useGalleryStore = defineStore('gallery', {
   },
   actions: {
     upsertGalleryImages(galleryImageUpserts: GalleryImageUpsert[]){
+      console.info(galleryImageUpserts);
         galleryImageUpserts.forEach(galleryImageUpsert => {
           const { id, ...galleryImageData } = galleryImageUpsert;
   
@@ -35,6 +37,7 @@ export const useGalleryStore = defineStore('gallery', {
           else{
             const newGalleryImage: GalleryImageData = {
                 name: "",
+                collection: "",
                 uri: "",
                 uploadedAt: new Date(),
               ...galleryImageData

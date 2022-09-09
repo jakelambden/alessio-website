@@ -3,6 +3,7 @@
     <v-img
         :src="props.galleryImage.uri"
         cover
+        aspect-ratio="0.9"
         class="bg-grey-lighten-2"
     >
     <div class="image-name">{{ props.galleryImage.name }}</div>
@@ -29,6 +30,7 @@ const props = defineProps<Props>();
 <style>
 .image-name {
   position: absolute; 
+  font-size: x-small;
   bottom: 0;
   right: 0;
   background-color: #121212;

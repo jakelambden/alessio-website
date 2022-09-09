@@ -41,9 +41,20 @@ fetch(myRequest)
     const galleryImages: GalleryImageUpsert[] = [];
 
     data.forEach(element => {
+      const splitName = element.name.split('/');
+
+      const name = (splitName.length > 1)
+      ? splitName[splitName.length - 1]
+      : splitName[0];
+      
+      const collection = (splitName.length > 1)
+      ? splitName[splitName.length - 2]
+      : '';
+
       const galleryData: GalleryImageUpsert = {
         id: uuid(),
-        name: element.name,
+        name,
+        collection,
         uri: element.uri,
         uploadedAt: new Date(element.uploadedAt),
       }

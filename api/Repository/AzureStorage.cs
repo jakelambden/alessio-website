@@ -37,7 +37,7 @@ namespace api.Repository
                     Uri = fullUri,
                     Name = name,
                     ContentType = file.Properties.ContentType,
-                    UploadedAt = file.Properties.CreatedOn
+                    UploadedAt = file.Properties.CreatedOn,
                 });
             }
             // Return all files to the requesting method
