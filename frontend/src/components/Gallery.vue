@@ -1,31 +1,50 @@
 <template>
-  <v-row>
-    <v-col
-      v-for="n in 9"
-      :key="n"
-      class="d-flex child-flex"
-      cols="4"
-    >
-      <v-img
-        :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-        aspect-ratio="1"
-        cover
-        class="bg-grey-lighten-2"
-      >
-        <template v-slot:placeholder>
-          <v-row
-            class="fill-height ma-0"
-            align="center"
-            justify="center"
-          >
-            <v-progress-circular
-              indeterminate
-              color="grey-lighten-5"
-            ></v-progress-circular>
-          </v-row>
-        </template>
-      </v-img>
-    </v-col>
-  </v-row>
+  <v-container class="d-flex justify-center">Gallery categories</v-container>
+  <v-expansion-panels>
+    <v-expansion-panel v-for="collection in galleryImages().entries()" :key="collection[0]" :title="collection[0]"
+      text="A short description of the category here">
+      <v-expansion-panel-text>
+        <v-row dense>
+          <v-col v-for="image in collection[1]" :key="image.id" class="d-flex child-flex" cols="4">
+            <GalleryImage :galleryImage="image" />
+          </v-col>
+        </v-row>
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
+
+<script setup lang='ts'>
+import { useGalleryStore } from '../stores/GalleryStore';
+import GalleryImage from '@/components/GalleryImage.vue';
+import { computed } from 'vue';
+
+export interface GalleryImagesReduced {
+  name: string;
+  uri: string;
+  uploadedAt: Date;
+  id: string;
+}
+
+const galleryStore = useGalleryStore();
+
+const galleryImages = computed(() => {
+  return () => {
+    const newMap = new Map<string, GalleryImagesReduced[]>();
+
+    galleryStore.getGalleryImages().forEach(galleryImage => {
+      const { collection, ...values } = galleryImage;
+
+      const collectionTitle = collection
+        ? collection
+        : 'Other';
+
+      newMap.has(collectionTitle)
+        ? newMap.get(collectionTitle)?.push(values)
+        : newMap.set(collectionTitle, [values]);
+    });
+
+    return newMap;
+  }
+});
+</script>
