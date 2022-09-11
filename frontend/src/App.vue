@@ -1,14 +1,14 @@
 <template>
-    <v-app>
-      <div class="repeating-gradient"/>
-      <NavMain />
-      <!-- <v-navigation-drawer app>
+  <v-app>
+    <div class="repeating-gradient" />
+    <NavMain />
+    <!-- <v-navigation-drawer app>
       </v-navigation-drawer> -->
-      <v-main>
-        <RouterView />
-      </v-main>
-      <MailingList />
-    </v-app>
+    <v-main>
+      <RouterView />
+    </v-main>
+    <MailingList />
+  </v-app>
 </template>
 
 <script setup lang = 'ts'>
@@ -22,7 +22,7 @@ const galleryStore = useGalleryStore();
 
 //Util Class?
 const myHeaders = new Headers();
-const myRequest = new Request('https://localhost:7102/api/storage/get', {
+const myRequest = new Request('https://alessio-website-api.azurewebsites.net/api/storage/get', {
   method: 'GET',
   headers: myHeaders,
   cache: 'default',
@@ -44,12 +44,12 @@ fetch(myRequest)
       const splitName = element.name.split('/');
 
       const name = (splitName.length > 1)
-      ? splitName[splitName.length - 1]
-      : splitName[0];
-      
+        ? splitName[splitName.length - 1]
+        : splitName[0];
+
       const collection = (splitName.length > 1)
-      ? splitName[splitName.length - 2]
-      : '';
+        ? splitName[splitName.length - 2]
+        : '';
 
       const galleryData: GalleryImageUpsert = {
         id: uuid(),
@@ -72,10 +72,10 @@ fetch(myRequest)
 /* @import '@/assets/base.css'; */
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
-.v-main{
+.v-main {
   align-self: center;
   width: 1024px;
   font-family: 'Josefin Sans', san-serif;
@@ -86,10 +86,9 @@ fetch(myRequest)
   width: 100%;
   height: 100%;
   background-image: repeating-linear-gradient(-45deg,
-                      rgba(255,255,255,0.01),
-                      rgba(255,255,255,0.01) 10px,
-                      rgba(255,255,255,0) 10px,
-                      rgba(255,255,255,0) 20px
-                    );
+      rgba(255, 255, 255, 0.01),
+      rgba(255, 255, 255, 0.01) 10px,
+      rgba(255, 255, 255, 0) 10px,
+      rgba(255, 255, 255, 0) 20px);
 }
 </style>
