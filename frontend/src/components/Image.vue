@@ -1,11 +1,11 @@
 <template>
   <v-container class="pa-0 ma-0">
-    <v-img :src="props.galleryImage.uri" :lazy-src="loading" cover aspect-ratio="0.9" v-on:click="imageOverlay = true">
-      <v-overlay v-model="imageOverlay" :opacity="100" scrim="#FFFFFF" class="align-center justify-center">
-        <v-container class="image-container" v-on:click="imageOverlay = false">
+    <v-img :src="props.imageAsset.uri" :lazy-src="loading" cover aspect-ratio="0.9" v-on:click="fullsceen = true">
+      <v-overlay v-model="fullsceen" :opacity="100" scrim="#FFFFFF" class="align-center justify-center">
+        <v-container class="image-container" v-on:click="fullsceen = false">
           <v-row align="center" class="fill-height">
             <v-col align="center" class="d-flex flex-column">
-              <v-img contain :src="props.galleryImage.uri">
+              <v-img contain :src="props.imageAsset.uri">
                 <template v-slot:placeholder>
                   <v-row class="fill-height ma-0" align="center" justify="center">
                     <v-progress-circular indeterminate color="grey-lighten-5">
@@ -14,7 +14,7 @@
                 </template>
               </v-img>
               <v-container class="bg-surface">
-                {{props.galleryImage.name}}
+                {{props.imageAsset.name}}
               </v-container>
             </v-col>
           </v-row>
@@ -32,17 +32,16 @@
 </template>
 
 <script setup lang="ts">
+import type { ImageAsset } from '@/stores/ImageStore';
 import { ref } from 'vue';
 import loading from '../assets/loading.jpg';
-import type { GalleryImagesReduced } from './Gallery.vue';
 
 interface Props {
-  galleryImage: GalleryImagesReduced
+  imageAsset: ImageAsset
 }
 
 const props = defineProps<Props>();
-const imageOverlay = ref(false);
-
+const fullsceen = ref(false);
 </script>
 
 <style>

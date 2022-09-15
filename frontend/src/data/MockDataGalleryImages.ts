@@ -1,4 +1,4 @@
-import type { GalleryImageUpsert } from "@/stores/GalleryStore";
+import type { GalleryImageUpsert } from "@/stores/ImageStore";
 import { v4 as uuid } from 'uuid';
 
 const randomNumber = () => {

@@ -5,8 +5,8 @@
         <h2 class="font-weight-black padded-element">Latest Uploads</h2>
         <v-divider class="padded-element" />
         <v-row style="width: 100%" dense class="padded-element">
-          <v-col v-for="galleryImage in latestUploads(imageCount)" :key="galleryImage.id" cols="6">
-            <GalleryImage :galleryImage="galleryImage" />
+          <v-col v-for="imageAsset in latestUploads(imageCount)" :key="imageAsset.uri" cols="6">
+            <Image :imageAsset="imageAsset" />
           </v-col>
         </v-row>
         <div class="padded-element">
@@ -21,18 +21,12 @@
 </template>
 
 <script setup lang='ts'>
-import { useGalleryStore } from '../stores/GalleryStore';
-import GalleryImage from '@/components/GalleryImage.vue';
+import { useImageStore } from '../stores/ImageStore';
+import Image from '@/components/Image.vue';
 import { computed } from 'vue';
-
-const galleryStore = useGalleryStore();
+const imageStore = useImageStore();
 const imageCount = 6;
-
-const latestUploads = computed(() => {
-  return (imageCount: number) => galleryStore.getGalleryImages()
-    .slice(0, imageCount);
-}
-);
+const latestUploads = computed(() => (imageCount: number) => imageStore.imagesSortedByUploaded.slice(0, imageCount));
 </script>
 
 <style>

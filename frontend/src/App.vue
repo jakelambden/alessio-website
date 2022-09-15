@@ -15,57 +15,15 @@
 import { RouterView } from 'vue-router';
 import NavMain from '@/components/NavMain.vue';
 import MailingList from '@/components/MailingList.vue'
-import { useGalleryStore, type GalleryImageUpsert } from './stores/GalleryStore';
-import { v4 as uuid } from 'uuid';
+import { useImageStore } from './stores/ImageStore';
+import { getImages } from './utils/fetch';
+import { onBeforeMount } from 'vue';
 
-const galleryStore = useGalleryStore();
-
-//Util Class?
-const myHeaders = new Headers();
-const myRequest = new Request('https://alessio-website-api.azurewebsites.net/api/storage/get', {
-  method: 'GET',
-  headers: myHeaders,
-  cache: 'default',
+onBeforeMount(async () => {
+  const imageStore = useImageStore();
+  const images = await getImages();
+  imageStore.insertImages(images);
 });
-
-interface IncomingImageData {
-  name: string,
-  uri: string,
-  uploadedAt: Date,
-}
-
-//Util Class?
-fetch(myRequest)
-  .then((response) => response.json())
-  .then((data: IncomingImageData[]) => {
-    const galleryImages: GalleryImageUpsert[] = [];
-
-    data.forEach(element => {
-      const splitName = element.name.split('/');
-
-      const name = (splitName.length > 1)
-        ? splitName[splitName.length - 1]
-        : splitName[0];
-
-      const collection = (splitName.length > 1)
-        ? splitName[splitName.length - 2]
-        : '';
-
-      const galleryData: GalleryImageUpsert = {
-        id: uuid(),
-        name,
-        collection,
-        uri: element.uri,
-        uploadedAt: new Date(element.uploadedAt),
-      }
-
-      galleryImages.push(galleryData);
-    });
-
-    galleryStore.upsertGalleryImages(galleryImages);
-    return;
-  });
-
 </script>
 
 <style>

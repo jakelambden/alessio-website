@@ -1,12 +1,26 @@
 <template>
-    <div class="index-content"><Logo/></div>
-    <div class="index-content"><AboutMe/></div>
-    <div class="index-content"><Bio/></div>
-    <div class="index-content"><WorkStyle/></div>
-    <div class="index-content"><Process/></div>
-    <div class="index-content"><LatestUploads/></div>
-    <div class="index-content"><UpcomingEvents/></div>
-    <Footer/>
+    <div class="index-content">
+        <Logo />
+    </div>
+    <div class="index-content">
+        <AboutMe />
+    </div>
+    <div class="index-content">
+        <Bio />
+    </div>
+    <div class="index-content">
+        <WorkStyle />
+    </div>
+    <div class="index-content">
+        <Process />
+    </div>
+    <div class="index-content">
+        <LatestUploads />
+    </div>
+    <div class="index-content">
+        <UpcomingEvents />
+    </div>
+    <Footer />
 </template>
      
 <script setup lang ='ts'>
@@ -21,7 +35,7 @@ import Footer from '../components/Footer.vue'
 </script>
 
 <style>
-.index-content{
+.index-content {
     height: calc((100vh - 64px));
 }
 </style>

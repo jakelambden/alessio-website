@@ -30,13 +30,26 @@ namespace api.Repository
             {
                 // Add each file retrieved from the storage container to the files list by creating a BlobDto object
                 string uri = container.Uri.ToString();
-                var name = file.Name;
-                var fullUri = $"{uri}/{name}";
+                string path = file.Name;
+                string fullUri = $"{uri}/{path}";
+                string[] splitPath = path.Split("/");
+                string filename = (splitPath.Length > 1)
+                    ? splitPath[splitPath.Length - 1]
+                    : splitPath[0];
+
+                string extension = Path.GetExtension(filename);
+                string name = filename.Substring(0, filename.Length - extension.Length);
+
+                string? collection = (splitPath.Length > 1)
+                    ? splitPath[splitPath.Length - 2]
+                    : null;
+
                 files.Add(new BlobDto
                 {
                     Uri = fullUri,
                     Name = name,
-                    ContentType = file.Properties.ContentType,
+                    Collection = collection,
+                    //ContentType = file.Properties.ContentType,
                     UploadedAt = file.Properties.CreatedOn,
                 });
             }
@@ -108,7 +121,11 @@ namespace api.Repository
                     string name = blobFilename;
                     string contentType = content.Value.Details.ContentType;
                     // Create new BlobDto with blob data from variables
-                    return new BlobDto { Content = blobContent, Name = name, ContentType = contentType };
+                    return new BlobDto {
+                        //Content = blobContent,
+                        Name = name,
+                        //ContentType = contentType
+                    };
                 }
             }
             catch (RequestFailedException ex)
