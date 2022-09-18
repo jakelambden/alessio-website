@@ -24,9 +24,10 @@ const darkTheme: ThemeDefinition = {
   colors: {
     background: '#000000',
     surface: '#121212',
+    "surface-variant": '#222222',
     primary: '#FF0000',
     "primary-variant": '#AA0000',
-    secondary: '#03DAC6',
+    secondary: '#380000',
     error: '#CF6679',
     "on-primary": '#000000',
     "on-secondary": '#000000',
@@ -34,7 +35,7 @@ const darkTheme: ThemeDefinition = {
     "on-surface": '#FFFFFF',
     "on-error": '#000000',
     info: '#000000',
-    success: '#000000',
+    success: '#00FF00',
     warning: '#000000',
   }
 }

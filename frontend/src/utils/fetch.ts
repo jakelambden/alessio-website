@@ -1,5 +1,3 @@
-import type { ImageAsset } from '@/stores/ImageStore';
-
 const rootURL = 'https://alessio-website-api.azurewebsites.net/api/';
 
 interface ImageAssetAPI {
@@ -29,7 +27,11 @@ export async function getImages(): Promise<ImageAsset[]> {
     });
 }
 
-export async function request(myRequest: Request) {
-    const response = await fetch(myRequest);
-    return await response.json();
+export async function request(myRequest: Request): Promise<ImageAssetAPI[]> {
+    const response: Response = await fetch(myRequest);
+    if (response.ok) return await response.json();
+    else {
+        console.error('Could not fetch from API');
+        return [];
+    }
 }
