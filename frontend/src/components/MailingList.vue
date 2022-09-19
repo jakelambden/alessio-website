@@ -34,6 +34,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { postEmail } from '@/utils/fetch';
+
 const regexPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const visible = ref(true);
 const email = ref('');
@@ -45,17 +47,16 @@ const regexTest = (email: string) => {
     else return true;
 }
 
-function onClick() {
+async function onClick() {
     if (!regexPattern.test(email.value) || email.value.length === 0) return;
     loading.value = true;
-    setTimeout(() => {
-        loading.value = false
-        successful.value = true
-        onSuccessful();
-    }, 2000)
+    const response = await postEmail(email.value);
+    loading.value = false
+    if (response) onSuccessful();
 }
 
 function onSuccessful() {
+    successful.value = true
     setTimeout(() => {
         complete.value = true;
     }, 2000)

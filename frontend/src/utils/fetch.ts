@@ -7,6 +7,21 @@ interface ImageAssetAPI {
     uploadedAt: string,
 }
 
+export async function postEmail(email: string): Promise<boolean> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/vnd.api+json');
+    const myRequest = new Request(`${rootURL}Email`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(email),
+    });
+
+    const response: Response = await fetch(myRequest);
+    if (response.ok)
+        return true;
+    return false;
+}
+
 export async function getImages(): Promise<ImageAsset[]> {
     const headers = new Headers();
     const myRequest = new Request(`${rootURL}storage/get`, {

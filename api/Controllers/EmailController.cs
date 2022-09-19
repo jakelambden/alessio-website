@@ -32,28 +32,39 @@ namespace api.Controllers
         //}
 
         // POST api/<EmailController>
-        //[HttpPost]
-        //public async Task PostAsync([FromBody] string value)
-        //{
-        //    var data = string.Format(@"{{ ""contacts"": [{{ ""email"": {0} }}] }}", value);
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] string value)
+        {
+            var data = $@"{{
+                ""contacts"": [
+                    {{
+                        ""email"": ""{value}""
+                    }}
+                ]
+            }}";
 
-        //    Console.WriteLine(data);
 
-            //var response = await _sendGridClient.RequestAsync(
-            //    method: SendGridClient.Method.PUT,
-            //    urlPath: "marketing/contacts",
-            //    requestBody: data
-            //);
+            var response = await _sendGridClient.RequestAsync(
+                method: BaseClient.Method.PUT,
+                urlPath: "marketing/contacts",
+                requestBody: data
+            );
 
-            //Console.WriteLine(response.StatusCode);
-            //Console.WriteLine(response.Body.ReadAsStringAsync().Result);
-            //Console.WriteLine(response.Headers.ToString());
-        //}
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
         // PUT api/<EmailController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)
         //{
+        //    _sendGridClient.MakeRequest(new HttpRequestMessage())
         //}
 
         // DELETE api/<EmailController>/5
