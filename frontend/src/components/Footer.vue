@@ -1,5 +1,5 @@
 <template>
-    <v-container style="height: 100px;">
+    <v-container class="pt-4 pb-4 pl-8 pr-8">
         <h6 class="font-weight-light font-italic text-center">
             Lorem ipsum dolor sit amet,
             consectetur adipiscing elit. Nam vitae eleifend felis.

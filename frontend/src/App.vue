@@ -2,8 +2,6 @@
   <v-app>
     <div class="repeating-gradient" />
     <NavMain />
-    <!-- <v-navigation-drawer app>
-      </v-navigation-drawer> -->
     <v-main>
       <RouterView />
     </v-main>

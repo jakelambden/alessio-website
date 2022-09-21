@@ -1,5 +1,5 @@
 <template>
-  <v-container class="bg-surface fill-height">
+  <v-container class="pt-16 pb-16 pl-8 pr-8 bg-surface">
     <v-row class="fill-height" align="center">
       <v-col align="center">
         <h2 class="font-weight-black padded-element">Latest Uploads</h2>

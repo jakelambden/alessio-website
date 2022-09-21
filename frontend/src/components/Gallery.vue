@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang='ts'>
-import { type ImageAsset, useImageStore } from '../stores/ImageStore';
+import { useImageStore } from '../stores/ImageStore';
 import Image from './Image.vue';
 import { computed } from 'vue';
 import { groupBy } from '@/utils/helpers';
