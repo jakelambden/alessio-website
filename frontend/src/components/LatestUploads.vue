@@ -6,7 +6,7 @@
         <v-divider class="padded-element" />
         <v-row style="width: 100%" dense class="padded-element">
           <v-col v-for="imageAsset in latestUploads(imageCount)" :key="imageAsset.uri" cols="6">
-            <Image :imageAsset="imageAsset" />
+            <ImageThumbnail :imageAsset="imageAsset" />
           </v-col>
         </v-row>
         <div class="padded-element">
@@ -22,7 +22,7 @@
 
 <script setup lang='ts'>
 import { useImageStore } from '../stores/ImageStore';
-import Image from '@/components/Image.vue';
+import ImageThumbnail from '@/components/ImageThumbnail.vue';
 import { computed } from 'vue';
 const imageStore = useImageStore();
 const imageCount = 6;

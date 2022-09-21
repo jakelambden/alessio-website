@@ -3,12 +3,12 @@
     Gallery categories
   </v-container>
   <v-expansion-panels>
-    <v-expansion-panel v-for="(value, key) in imagesGroupedByCollection" :key="key" :title="key"
+    <v-expansion-panel v-for="(value, key) in imagesGroupedByCollection" :key="key" :title="(key as string)"
       text="A short description of the category here">
       <v-expansion-panel-text>
         <v-row dense>
           <v-col v-for="imageAsset in value" :key="imageAsset.uri" class="d-flex child-flex" cols="4">
-            <Image :imageAsset="imageAsset" />
+            <ImageThumbnail :imageAsset="imageAsset" />
           </v-col>
         </v-row>
       </v-expansion-panel-text>
@@ -18,7 +18,7 @@
 
 <script setup lang='ts'>
 import { useImageStore } from '../stores/ImageStore';
-import Image from './Image.vue';
+import ImageThumbnail from './ImageThumbnail.vue';
 import { computed } from 'vue';
 import { groupBy } from '@/utils/helpers';
 
